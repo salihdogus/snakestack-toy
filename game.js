@@ -117,7 +117,7 @@
   let highScore = parseInt(localStorage.getItem('snakeshooter-high')) || 0;
 
   // Timer (5 minutes)
-  const GAME_TIME_LIMIT = 300;
+  const GAME_TIME_LIMIT = 600;
   let gameTimer = GAME_TIME_LIMIT;
 
   // Damage multipliers (perks)
