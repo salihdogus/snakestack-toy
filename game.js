@@ -2821,8 +2821,8 @@
     }
   });
 
-  // Touch support — joystick via touch
-  canvas.addEventListener('touchstart', (e) => {
+  // Touch support — joystick via touch (on document so HUD doesn't block)
+  document.addEventListener('touchstart', (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     mouseX = touch.clientX;
@@ -2848,7 +2848,7 @@
     joystickY = touch.clientY;
   }, { passive: false });
 
-  canvas.addEventListener('touchmove', (e) => {
+  document.addEventListener('touchmove', (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     mouseX = touch.clientX;
@@ -2860,12 +2860,12 @@
     }
   }, { passive: false });
 
-  canvas.addEventListener('touchend', (e) => {
+  document.addEventListener('touchend', (e) => {
     e.preventDefault();
     joystickActive = false;
   }, { passive: false });
 
-  canvas.addEventListener('touchcancel', (e) => {
+  document.addEventListener('touchcancel', (e) => {
     e.preventDefault();
     joystickActive = false;
   }, { passive: false });
