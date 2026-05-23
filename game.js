@@ -2821,23 +2821,53 @@
     }
   });
 
-  // Touch support
-  canvas.addEventListener('touchmove', (e) => {
-    e.preventDefault();
-    const touch = e.touches[0];
-    mouseX = touch.clientX;
-    mouseY = touch.clientY;
-  }, { passive: false });
-
+  // Touch support — joystick via touch
   canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     const touch = e.touches[0];
     mouseX = touch.clientX;
     mouseY = touch.clientY;
 
+    // Menu/gameover/victory — tap to start
     if (state === 'menu' || state === 'gameover' || state === 'victory') {
       initGame();
+      return;
     }
+
+    // Perk card selection
+    if (perkActive) {
+      handlePerkClick(touch.clientX, touch.clientY);
+      return;
+    }
+
+    // Start joystick
+    joystickActive = true;
+    joystickOriginX = touch.clientX;
+    joystickOriginY = touch.clientY;
+    joystickX = touch.clientX;
+    joystickY = touch.clientY;
+  }, { passive: false });
+
+  canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    mouseX = touch.clientX;
+    mouseY = touch.clientY;
+
+    if (joystickActive) {
+      joystickX = touch.clientX;
+      joystickY = touch.clientY;
+    }
+  }, { passive: false });
+
+  canvas.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    joystickActive = false;
+  }, { passive: false });
+
+  canvas.addEventListener('touchcancel', (e) => {
+    e.preventDefault();
+    joystickActive = false;
   }, { passive: false });
 
   /* ==========================================================
