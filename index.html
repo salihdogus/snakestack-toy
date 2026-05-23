@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="Snake Shooter — A modern browser game with mouse controls, shooting mechanics, and boss battles">
+  <title>Snake Shooter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- HUD -->
+    <div id="hud">
+      <div id="hud-left">
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <span id="score-value" class="hud-value">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">PARTS</span>
+          <span id="parts-value" class="hud-value">0</span>
+        </div>
+      </div>
+      <div id="hud-center">
+        <h1 id="game-title">SNAKE<span class="accent">SHOOTER</span></h1>
+        <div id="boss-hp-bar" class="boss-hp-bar hidden">
+          <div id="boss-hp-fill" class="boss-hp-fill"></div>
+        </div>
+      </div>
+      <div id="hud-right">
+        <div class="hud-item">
+          <span class="hud-label">HIGH</span>
+          <span id="high-score-value" class="hud-value">0</span>
+        </div>
+        <div class="hud-item hud-item-boss">
+          <span class="hud-label">BOSS HP</span>
+          <div id="boss-hp-mini" class="boss-hp-mini">
+            <div id="boss-hp-mini-fill" class="boss-hp-mini-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <canvas id="game-canvas"></canvas>
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="overlay">
+      <div class="overlay-content">
+        <h1 class="overlay-title">SNAKE<span class="accent">SHOOTER</span></h1>
+        <p class="overlay-subtitle">Move your mouse to steer. Shoot boxes. Build your snake. Defeat the boss.</p>
+        <div class="controls-info">
+          <div class="control-visual">
+            <div class="mouse-icon">
+              <div class="mouse-body">
+                <div class="mouse-wheel"></div>
+              </div>
+            </div>
+            <span class="control-label">Move to steer</span>
+          </div>
+        </div>
+        <button id="start-btn" class="btn-primary">
+          <span>START GAME</span>
+          <div class="btn-glow"></div>
+        </button>
+        <p class="press-hint">or click anywhere</p>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="overlay-title gameover-title">GAME<span class="accent">OVER</span></h2>
+        <div class="final-stats">
+          <div class="stat-card">
+            <span class="stat-label">Final Score</span>
+            <span id="final-score" class="stat-value">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Max Parts</span>
+            <span id="final-parts" class="stat-value">0</span>
+          </div>
+          <div class="stat-card highlight">
+            <span class="stat-label">Total DMG</span>
+            <span id="final-damage" class="stat-value">0</span>
+          </div>
+        </div>
+        <button id="restart-btn" class="btn-primary">
+          <span>PLAY AGAIN</span>
+          <div class="btn-glow"></div>
+        </button>
+        <p class="press-hint">or click anywhere</p>
+      </div>
+    </div>
+
+    <!-- Victory Screen (Boss Defeated) -->
+    <div id="victory-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="overlay-title victory-title">BOSS<span class="accent">DEFEATED</span></h2>
+        <div class="final-stats">
+          <div class="stat-card">
+            <span class="stat-label">Final Score</span>
+            <span id="victory-score" class="stat-value">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Max Parts</span>
+            <span id="victory-parts" class="stat-value">0</span>
+          </div>
+          <div class="stat-card highlight victory-highlight">
+            <span class="stat-label">Total DMG</span>
+            <span id="victory-damage" class="stat-value">0</span>
+          </div>
+        </div>
+        <button id="victory-restart-btn" class="btn-primary btn-victory">
+          <span>PLAY AGAIN</span>
+          <div class="btn-glow"></div>
+        </button>
+        <p class="press-hint">or click anywhere</p>
+      </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pause-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="overlay-title">PAUSED</h2>
+        <p class="overlay-subtitle">Press <kbd>ESC</kbd> to resume</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
